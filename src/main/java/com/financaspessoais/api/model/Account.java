@@ -35,7 +35,11 @@ public class Account {
     @Column (name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    protected Account(
+    protected Account() {
+
+    }
+
+    public Account(
         String name,
         String type,
         BigDecimal initialBalance

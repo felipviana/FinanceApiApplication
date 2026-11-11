@@ -1,7 +1,6 @@
 package com.financaspessoais.api.controller;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
