@@ -10,4 +10,16 @@ public class BalanceService {
     {
         return income.subtract(expenses);
     }
+
+    public String getFinancialStatus(BigDecimal balance){
+        int comparison = balance.compareTo(BigDecimal.ZERO);
+
+        if (comparison == 0){
+            return "BALANCED";
+        } else if (comparison > 0) {
+            return "POSITIVE";
+        } else {
+            return "NEGATIVE";
+        }
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.financaspessoais.api.dto.BalanceResponse;
 import com.financaspessoais.api.service.BalanceService;
 
 @RestController 
@@ -21,9 +22,16 @@ public class BalanceController {
     }
 
     @GetMapping 
-    public Map<String, BigDecimal> getBalance(@RequestParam BigDecimal income, @RequestParam BigDecimal expenses){
+    public BalanceResponse getBalance(@RequestParam BigDecimal income, @RequestParam BigDecimal expenses){
         BigDecimal balance = balanceService.calculateBalance(income, expenses);
-
-        return Map.of("balance", balance);
+        
+        String financialStatus = balanceService.getFinancialStatus(balance);
+        
+        return new BalanceResponse(
+            income,
+            expenses,
+            balance,
+            financialStatus
+        );
     }
 }
