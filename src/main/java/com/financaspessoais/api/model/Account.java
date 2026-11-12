@@ -69,5 +69,15 @@ public class Account {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    public void update(
+        String name,
+        String type,
+        BigDecimal initialBalance
+    ) {
+        this.name = name;
+        this.type = type;
+        this.initialBalance = initialBalance;
+    }
 }
 

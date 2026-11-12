@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.financaspessoais.api.model.Account;
 import com.financaspessoais.api.repository.AccountRepository;
+import com.financaspessoais.api.exception.AccountNotFoundException;
+import com.financaspessoais.api.dto.UpdateAccountRequest;
 
 @Service 
 public class AccountService {
@@ -25,5 +27,18 @@ public class AccountService {
 
     public List<Account> findAllAccounts() {
         return accountRepository.findAll();
+    }
+
+    public Account findAccountById(Long id) {
+        return accountRepository.findById(id)
+            .orElseThrow(() -> new AccountNotFoundException(id));
+    }
+
+    public Account updateAccount(Long id, UpdateAccountRequest request) {
+        Account account = findAccountById(id);
+
+        account.update(request.name(), request.type(), request.initialBalance());
+
+        return accountRepository.save(account);
     }
 }

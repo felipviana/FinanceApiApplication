@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.financaspessoais.api.dto.ValidationErrorResponse;
+import com.financaspessoais.api.dto.ApiErrorResponse;
 
 @RestControllerAdvice 
 public class GlobalExceptionHandler {
@@ -39,4 +40,17 @@ public class GlobalExceptionHandler {
             .body(response);
     }
     
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleAccountNotFound(
+        AccountNotFoundException exception
+    ) {
+        ApiErrorResponse response = new ApiErrorResponse(
+            404,
+            exception.getMessage()
+        );
+
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(response);
+    }
 }
