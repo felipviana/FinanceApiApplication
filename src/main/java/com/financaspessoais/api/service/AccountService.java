@@ -41,4 +41,10 @@ public class AccountService {
 
         return accountRepository.save(account);
     }
+
+    public void deleteAccount(Long id) {
+        Account account = findAccountById(id);
+
+        accountRepository.delete(account);
+    }
 }
